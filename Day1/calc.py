@@ -2,8 +2,13 @@ import requests
 
 
 if __name__ == "__main__":
-    f = open("input.txt", "r")
-    values = [int(r) for r in f]
+    headers = {"Cookie": "session=" + str(open("../sessioncookie").readline())}
+    resp = requests.get("https://adventofcode.com/2020/day/1/input", headers=headers)
+    body = resp.content
+    values = [int(x) for x in body.decode().splitlines()]
+    print(values)
+    # f = open("input.txt", "r")
+    # values = [int(r) for r in body]
     values.sort()
     for i in range(0,len(values)-2):
         for j in range(i+1, len(values)-1):
